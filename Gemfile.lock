@@ -218,6 +218,7 @@ DEPENDENCIES
   googl (~> 0.7.1)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  nokogiri (~> 1.11, >= 1.11.6)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
