@@ -11,7 +11,6 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap';
-import {shorten} from 'jquery-shorten';
 
 require("packs/alert.js")
 
