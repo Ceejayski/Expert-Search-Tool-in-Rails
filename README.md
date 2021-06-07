@@ -1,6 +1,9 @@
 # README
 
 This is a simple expert search tool in rails, members are created with their their name and their personal website, the member's header(h1-h3) is scraped from their page and added to the search tool, which is used to search the database for expert with headers on a particular topic.
+<p float = 'left'>
+    <img src="img/screenshot.png" alt="Private events home page">
+</p>
 
 ### See the Live version here - > [Live Link](https://peaceful-plateau-62698.herokuapp.com/members/new)
 
