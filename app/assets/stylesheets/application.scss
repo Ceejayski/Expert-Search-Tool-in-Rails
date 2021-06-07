@@ -1,0 +1,80 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap/scss/bootstrap";
+
+.friends-panel {
+  max-height: 70vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  line-height: 1.3em;
+}
+
+.friend-div {
+  border: 1px solid #ccc;
+  width: 80%;
+  margin: auto;
+  padding: 1em;
+
+  .member-info {
+    width: 80%;
+  }
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-em {
+  height: 1.3em;
+  overflow: hidden;
+}
+
+.dnone {
+  display: none;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.search-bar {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.hover {
+  border: 1px solid;
+  position: relative;
+
+  .hover-dnone {
+    display: none;
+    position: absolute;
+    right: -10%;
+  }
+}
+.login-cont {
+  height: 80vh;
+
+  position: relative;
+  .login {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,26 @@
+<h4 class="text-center">
+  All Experts
+</h4>
+<div class="row">
+  <% @members.each do |member|%>
+    <div class="col-6 mt-3">
+      <div class="card-header">
+        <h4>
+          <%= camelize(member.name)%>
+        </h4>
+      </div>
+      <div class="card-body">
+        <p> Number of friends: <%= friend_count(member) %></p>
+        <p> Website: <a href=<%= member.shortner.short_url%>> <%= link_text(member.shortner.short_url)%> </a></p>
+        <p class="desc">
+          Headers: <%= header_list(member.shortner.headers) %>
+        </p>
+        <a href='#' class="show-more dnone" role="button">show more</a>
+        <div class="w-50 mt-2 mx-auto d-flex justify-content-between">
+          <p> <%= link_to 'show', member_path(member), class: 'btn btn-primary' %> </p>
+          <p> <%= link_to 'delete', member_path(member), method: :delete, class: 'btn btn-danger', data:{ confirm: "Are you sure?"  } %> </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
