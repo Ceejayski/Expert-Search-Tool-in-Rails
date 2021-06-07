@@ -1,0 +1,49 @@
+<div class="card  ">
+  <div class="card-header d-flex justify-content-between">
+    <h4> <%= camelize(@member.name)%>'s Details </h4>
+    <p>
+      <%= link_to(member_friendships_path(@member)) do%>
+        <%= friend_count(@member) %>
+      <% end %>
+    </p>
+  </div>
+  <div class="card-body">
+    <p>Website:  <a href=<%= @member.shortner.short_url%>> <%= link_text(@member.shortner.short_url)%> </a></p>
+    <p> Headers: <%= header_list(@member.shortner.headers) %> </p>
+  </div>
+</div>
+<h4 class="mt-4 text-center">Search for Expert</h4>
+<%= form_tag(member_path, method: :get, class: "search-bar my-3 d-flex") do%>
+  <%= text_field_tag(:search, params[:search], class: "form-control me-2",type: "search", placeholder: "Search", aria_label: "Search") %>
+  <%= submit_tag('Search', class: "btn btn-outline-success")%>
+<% end %>
+<% if (params[:search]) %>
+  <% if @search_results.empty?%>
+    <p class="w-50 mx-auto text-center alert alert-primary mt-3 "> No expert with this topic </p>
+  <% else %>
+    <p class="w-50 mx-auto text-center alert alert-primary mt-3 "> <%= pluralize(@search_results.size, 'Expert')%> found</p>
+    <div class="main-results">
+      <% @search_results.each do |x,y|%>
+        <div class=" w-80 mx-auto hover p-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <p class="mb-0 w-80">
+              <%= camelize(x.name)%> has <%= header_count(y) %> on the topic <%= camelize(params[:search])%>.
+              <%= mutuals_count(@member, x) %><%= mutual_friends(@member, x) %>
+            </p>
+            <p class="mb-0">
+              <%= friend_btn(x) %>
+            </p>
+          </div>
+          <div class="hover-dnone">
+            <% @member.mutuals(x).each do |friend| %>
+              <p>
+                <%= member_getter(friend).name%>
+              </p>
+            <% end %>
+          </div>
+        </div>
+        <p>
+        <% end %>
+      <%end%>
+    </div>
+  <% end %>

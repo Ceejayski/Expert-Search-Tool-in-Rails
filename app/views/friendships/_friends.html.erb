@@ -1,0 +1,29 @@
+<div class="friends-panel">
+  <% if @members.size < 1 %>
+    <p>There are no friends/members added yet</p>
+  <% else %>
+    <% @members.each do |member|%>
+      <div class="d-flex justify-content-between py-4 my-2 friend-div">
+        <div class="member-info">
+          <p>Member Name: 
+            <%= link_to(member) do%>
+              <%= camelize(member.name)%>
+            <% end%>
+          </p>
+          <p> Website: <a href=<%= member.shortner.short_url%>> <%= link_text(member.shortner.short_url)%> </a></p>
+          <p class="desc">
+            Headers: <%= header_list(member.shortner.headers) %>
+          </p>
+          <a href='#' class="show-more dnone" role="button">show more</a>
+        </div>
+        <div>
+          <p> <%= friend_count(member) %></p>
+          <p> <%= friend_btn member%> </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class='text-center mt-3'>
+  <%= link_to 'Member page', @member, class: 'btn btn-primary'%>
+</div>

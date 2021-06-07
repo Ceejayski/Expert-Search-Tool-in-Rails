@@ -1,0 +1,17 @@
+ 
+<div class='login-cont'>
+  <div class="login">
+    <h4 class="text-center mb-3">Create a new Member</h4>
+    <%= form_for(@member) do |f| %>
+      <div class="mb-3">
+        <label for="member_name" class="form-label">Member Name</label>
+        <%= f.text_field :name, label: "text", class:'form-control' %>
+      </div>
+      <div class="mb-3">
+        <label for="member_wesite" class="form-label">Member Website</label>
+        <%= f.text_area :website, label: "text", class:'form-control' %>
+      </div>
+      <%= f.submit 'Create member', class:'btn btn-success'%>
+    <% end %>
+  </div>
+</div>
