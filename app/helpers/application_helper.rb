@@ -56,7 +56,9 @@ module ApplicationHelper
     return if res.size == 0
     return "#{member_getter(res[0]).name} knows #{camelize(member.name)}" if res.size == 1
 
-    ", #{camelize(user.name)}'s friends #{member_getter(res[0]).name} and #{member_getter(res[1]).name} knows #{camelize(member.name)}" if res.size > 1
+    if res.size > 1
+      ", #{camelize(user.name)}'s friends #{member_getter(res[0]).name} and #{member_getter(res[1]).name} knows #{camelize(member.name)}"
+    end
   end
 
   def bootstrap_class_for_flash(flash_type)

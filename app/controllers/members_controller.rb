@@ -3,13 +3,12 @@ class MembersController < ApplicationController
   before_action :other_members, only: %i[show]
   def index
     @members = Member.all
-
   end
 
   def show
     session[:member_id] = @member.id
     @not_freinds = not_friends(@member)
-    @search_results = search(@not_freinds, params[:search]) 
+    @search_results = search(@not_freinds, params[:search])
   end
 
   def new
@@ -23,7 +22,7 @@ class MembersController < ApplicationController
       @member.save
       @short = Shortner.create(member_id: @member.id, short_url: short['tiny_url'], headers: header_getter(@member))
       session[:member_id] = @member.id
-      redirect_to new_member_friendship_path(@member) , notice: 'members created successfully'
+      redirect_to new_member_friendship_path(@member), notice: 'members created successfully'
     else
 
       flash[:error] = @member.errors.full_messages.to_sentence

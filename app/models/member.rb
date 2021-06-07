@@ -19,5 +19,4 @@ class Member < ApplicationRecord
       b_friends.find_by(person_id: friend.person_id)
     end
   end
-
 end

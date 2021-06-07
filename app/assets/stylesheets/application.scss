@@ -33,14 +33,14 @@
   }
 }
 
-  .h-auto {
-    height: auto;
-  }
+.h-auto {
+  height: auto;
+}
 
-  .h-em {
-    height: 1.3em;
-    overflow: hidden;
-  }
+.h-em {
+  height: 1.3em;
+  overflow: hidden;
+}
 
 .dnone {
   display: none;
@@ -59,23 +59,22 @@
   border: 1px solid;
   position: relative;
 
-  .hover-dnone{
+  .hover-dnone {
     display: none;
     position: absolute;
     right: -10%;
   }
 }
-.login-cont{
+.login-cont {
   height: 80vh;
 
   position: relative;
   .login {
     margin: 0;
     position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 }
-

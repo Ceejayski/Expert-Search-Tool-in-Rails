@@ -51,8 +51,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  
-
   def not_friends(member)
     member.friends.filter_map { |friend| Member.where.not(id: [friend.person_id, member.id]) }[0].to_a
   end
