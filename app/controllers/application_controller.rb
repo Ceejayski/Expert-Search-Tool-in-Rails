@@ -9,23 +9,17 @@ class ApplicationController < ActionController::Base
   end
 
   def url_shorten(member)
-    # link = CGI.escape(member.website)
-    # url = "https://cutt.ly/api/api.php?key=a6afc90116ff77be651af7ebe3cacc9d6fd57&short=#{link}"
-    # JSON.parse(HTTParty.get(url).body)['url']['shortLink']
     HTTParty::Basement.default_options.update(verify: false)
-    id = Member.all.last ? Member.all.last.id + 1 : 0
-    link = 'https://api.tinyurl.com/create'
-    body = { url: member.website, domain: 'tiny.one', alias: "samplexpert#{member.name}" }
+    link = 'https://api.shorte.st/v1/data/url'
+    body = { urlToShorten: member.website }
     headers = {
-      'accept' => 'application/json',
-      'Authorization' => 'Bearer FwvYaqwvS2AlLk5XH8nrIKILuMbWVjqsRBTGdyjl9J44TefIXzjaBkfWEheW',
-      'Content-Type' => 'application/json'
+      'public-api-token' => '9be5997ba379736d85aefed334229bf0'
     }
-    response = HTTParty.post(link,
-                             body: body.to_json,
-                             headers: headers)
+    response = HTTParty.put(link,
+                            body: body.to_json,
+                            headers: headers)
 
-    JSON.parse(response.body)['data']
+    JSON.parse(response.body)['shortenedUrl']
   end
 
   def header_getter(member)

@@ -20,7 +20,7 @@ class MembersController < ApplicationController
     short = url_shorten(@member)
     if @member.valid? && short
       @member.save
-      @short = Shortner.create(member_id: @member.id, short_url: short['tiny_url'], headers: header_getter(@member))
+      @short = Shortner.create(member_id: @member.id, short_url: short, headers: header_getter(@member))
       session[:member_id] = @member.id
       redirect_to new_member_friendship_path(@member), notice: 'members created successfully'
     else
