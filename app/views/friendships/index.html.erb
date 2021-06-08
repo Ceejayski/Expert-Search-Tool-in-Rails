@@ -1,5 +1,9 @@
-<h4>
-<%= camelize(current_user.name) %>'s Friends
-</h4>
-
+<div class="d-flex justify-content-between">
+  <h4>
+    <%= camelize(current_user.name) %>'s Friends
+  </h4>
+  <p>
+    <%= link_to  "Add new Friends", new_member_friendship_path(current_user) %>
+  </p>
+</div>
 <%= render 'friendships/friends' %>
