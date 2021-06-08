@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
   end
 
   def url_shorten(member)
+    # link = CGI.escape(member.website)
+    # url = "https://cutt.ly/api/api.php?key=a6afc90116ff77be651af7ebe3cacc9d6fd57&short=#{link}"
+    # JSON.parse(HTTParty.get(url).body)['url']['shortLink']
     HTTParty::Basement.default_options.update(verify: false)
     link = 'https://api.shorte.st/v1/data/url'
     body = { urlToShorten: member.website }
@@ -43,14 +46,6 @@ class ApplicationController < ActionController::Base
     a_friends.select do |friend|
       b_friends.find_by(person_id: friend.person_id)
     end
-  end
-
-  def not_friends(member)
-    member.friends.filter_map { |friend| Member.where.not(id: [friend.person_id, member.id]) }[0].to_a
-  end
-
-  def friends(member)
-    member.friends.filter_map { |friend| Member.find(friend.person_id) }
   end
 
   def search(members, search)

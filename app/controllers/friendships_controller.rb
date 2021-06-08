@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
   before_action :find_friends, only: %i[destroy]
   before_action :other_members, only: %i[new]
   def index
-    @members = friends(@member)
+    @members = Member.friends(@member)
   end
 
   def new; end

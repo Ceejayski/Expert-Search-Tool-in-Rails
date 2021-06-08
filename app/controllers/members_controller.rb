@@ -1,52 +1,45 @@
-class MembersController < ApplicationController
-  before_action :set_member, only: %i[show edit update destroy]
-  before_action :other_members, only: %i[show]
+class FriendshipsController < ApplicationController
+  before_action :find_person
+  before_action :find_friends, only: %i[destroy]
+  before_action :other_members, only: %i[new]
   def index
-    @members = Member.all
+    @members = Member.friends(@member)
   end
 
-  def show
-    session[:member_id] = @member.id
-    @not_freinds = not_friends(@member)
-    @search_results = search(@not_freinds, params[:search])
-  end
-
-  def new
-    @member = Member.new
-  end
+  def new; end
 
   def create
-    @member = Member.new(member_params)
-    short = url_shorten(@member)
-    if @member.valid? && short
-      @member.save
-      @short = Shortner.create(member_id: @member.id, short_url: short, headers: header_getter(@member))
-      session[:member_id] = @member.id
-      redirect_to new_member_friendship_path(@member), notice: 'members created successfully'
-    else
-
-      flash[:error] = @member.errors.full_messages.to_sentence
-
-      redirect_to new_member_path
+    respond_to do |format|
+      if @member.friendships.create(friend_id: current_user.id)
+        @member.friends.create(person_id: current_user.id)
+        format.html { redirect_back fallback_location: root_path, notice: 'Friend added' }
+      end
     end
   end
 
-  def update; end
-
-  def edit; end
-
   def destroy
-    @member.destroy
-    redirect_to members_url, notice: 'Post deleted successfully'
+    respond_to do |format|
+      if @friends.destroy_all
+        format.js { render js: 'window.top.location.reload(true);' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Unfriended' }
+      end
+    end
   end
 
   private
 
-  def set_member
-    @member = Member.find(params[:id])
+  def find_person
+    @member = Member.find(params[:member_id])
   end
 
-  def member_params
-    params.require(:member).permit(:name, :website, :short_url, :headers)
+  def find_friends
+    @friends = Friendship.where(person_id: [current_user.id, params[:member_id]],
+                                friend_id: [params[:member_id], current_user.id])
+  end
+
+  def destroy_all
+    each do |x|
+      x.destroy
+    end
   end
 end

@@ -6,6 +6,8 @@ class Member < ApplicationRecord
   has_one :shortner, dependent: :destroy
   has_many :friendships, foreign_key: 'person_id', class_name: 'Friendship', dependent: :delete_all
   has_many :friends, foreign_key: 'friend_id', class_name: 'Friendship', dependent: :delete_all
+  scope :not_friends, ->(member) { where.not(id: (member.friends.map(&:person_id) + [member.id])) }
+  scope :friends, ->(member) { where(id: member.friends.map(&:person_id)) }
 
   def friends?(member)
     pre_vote = friends.find { |friend| friend.person_id == member.person_id }
